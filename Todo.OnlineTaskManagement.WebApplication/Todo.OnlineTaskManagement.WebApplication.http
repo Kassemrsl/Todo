@@ -1,0 +1,6 @@
+@Todo.OnlineTaskManagement.WebApplication_HostAddress = http://localhost:5275
+
+GET {{Todo.OnlineTaskManagement.WebApplication_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
