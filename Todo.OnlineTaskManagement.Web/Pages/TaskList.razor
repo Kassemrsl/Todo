@@ -1,0 +1,110 @@
+﻿@page "/tasks"
+@using Todo.OnlineTaskManagement.BlazorApp.Application.Gateways
+@using Todo.OnlineTaskManagement.Shared.Responses
+
+@inject ITasksGateway TasksGateway
+
+<div class="container my-4">
+
+    <!-- Search bar -->
+    <div class="input-group mb-3">
+        <input class="form-control" placeholder="Search…" @bind="_search" @bind:event="oninput">
+        <button class="btn btn-primary" @onclick="LoadAsync">Go</button>
+    </div>
+
+    <!-- Task table -->
+    <table class="table table-hover table-sm">
+        <thead>
+            <tr>
+                <th @onclick="() => SortBy(nameof(TaskResponse.Title))" role="button">
+                    Title @SortIcon(nameof(TaskResponse.Title))
+                </th>
+                <th @onclick="() => SortBy(nameof(TaskResponse.Description))" role="button">
+                    Description @SortIcon(nameof(TaskResponse.Description))
+                </th>
+                <th @onclick="() => SortBy(nameof(TaskResponse.Category))" role="button">
+                    Category @SortIcon(nameof(TaskResponse.Category))
+                </th>
+                <th @onclick="() => SortBy(nameof(TaskResponse.Status))" role="button">
+                    Status @SortIcon(nameof(TaskResponse.Status))
+                </th>
+                <th @onclick="() => SortBy(nameof(TaskResponse.DueDate))" role="button">
+                    Due @SortIcon(nameof(TaskResponse.DueDate))
+                </th>
+                <th @onclick="() => SortBy(nameof(TaskResponse.Priority))" role="button">
+                    Priority @SortIcon(nameof(TaskResponse.Priority))
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (_rows is null)
+            {
+                <tr><td colspan="3" class="text-center py-3">Loading…</td></tr>
+            }
+            else if (_rows.Count == 0)
+            {
+                <tr><td colspan="3" class="text-center py-3">No tasks</td></tr>
+            }
+            else
+            {
+                @foreach (var row in _rows)
+                {
+                    <tr>
+                        <td>@row.Title</td>
+                        <td>@row.Description</td>
+                        <td>@row.Category</td>
+                        <td>@row.Status</td>
+                        <td>@row.DueDate.Value.ToShortDateString()</td>
+                        <td>@row.Priority</td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+    </table>
+
+    <!-- Pager -->
+    <nav>
+        <ul class="pagination pagination-sm">
+            <li class="page-item @( _page == 1 ? "disabled" : "")">
+                <button class="page-link" @onclick="() => ChangePage(_page - 1)">Prev</button>
+            </li>
+            <li class="page-item">
+                <span class="page-link">@_page</span>
+            </li>
+            <li class="page-item @(_hasMore ? "" : "disabled")">
+                <button class="page-link" @onclick="() => ChangePage(_page + 1)">Next</button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+@code {
+    private string? _search;
+    private List<TaskResponse>? _rows;
+    private int _page = 1;
+    private bool _hasMore;
+    private string _sort = nameof(TaskResponse.DueDate);
+    private bool _asc = true;
+
+    protected override Task OnInitializedAsync() => LoadAsync();
+
+    private async Task LoadAsync()
+    {
+        _rows = await TasksGateway.GetTasksAsync();
+    }
+
+    private void SortBy(string key)
+    {
+        if (_sort == key) _asc = !_asc; else (_sort, _asc) = (key, true);
+        _page = 1;
+        _ = LoadAsync();
+    }
+
+    private Task ChangePage(int p) { _page = p; return LoadAsync(); }
+
+    private MarkupString SortIcon(string key) =>
+        (key == _sort)
+            ? (MarkupString)$"<small>{(_asc ? "▲" : "▼")}</small>"
+            : (MarkupString)"";
+}

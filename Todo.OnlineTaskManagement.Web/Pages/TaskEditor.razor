@@ -1,0 +1,39 @@
+﻿@page "/tasks/editor"
+
+@using Todo.OnlineTaskManagement.BlazorApp.Application.Gateways
+@using Todo.OnlineTaskManagement.Shared.Requests
+
+@inject ITasksGateway TaskGateway
+
+<EditForm Model="Model" OnSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+    <div class="col-md-5">
+        <label for="inputTitle" class="form-label">Title</label>
+        <InputText @bind-Value="@Model.Title" type="text" class="form-control" id="inputTitle"></InputText>
+    </div>
+    <div class="col-md-5 mt-4">
+        <label for="inputDescription" class="form-label">Description</label>
+        <InputText @bind-Value="@Model.Description" type="text" class="form-control" id="inputDescription"></InputText>
+    </div>
+    <div class="col-md-5 mt-4">
+        <label for="inputCategory" class="form-label">Category</label>
+        <InputText @bind-Value="@Model.Category" type="text" class="form-control " id="inputCategory"></InputText>
+    </div>
+    <div class="col-md-5 mt-4">
+        <label for="inputDueDate" class="form-label">Due Date</label>
+        <InputDate @bind-Value="@Model.DueDate" class="form-control " id="inputDueDate"></InputDate>
+    </div>
+    <div class="col-md-5 mt-4">
+        <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+</EditForm>
+
+@code {
+    private TaskCreationRequest? Model { get; set; }
+
+    protected override async Task OnInitializedAsync() => Model ??= new();
+
+    private async Task OnSubmit()
+    {
+    }
+}

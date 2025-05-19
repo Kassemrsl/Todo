@@ -3,20 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.OnlineTaskManagement.API", "Todo.OnlineTaskManagement.API\Todo.OnlineTaskManagement.API.csproj", "{F7AB46FE-B72F-4DC0-936E-A34B04F39C4E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{491B6FB0-62CB-433A-AC7E-B8E4A9F0ABB5} = {491B6FB0-62CB-433A-AC7E-B8E4A9F0ABB5}
-		{6E7D2F15-1D04-4224-979E-5071621C73AA} = {6E7D2F15-1D04-4224-979E-5071621C73AA}
-		{824D5FA5-C13F-4BC8-B4AC-D8A5FCA35F8F} = {824D5FA5-C13F-4BC8-B4AC-D8A5FCA35F8F}
-		{B5E37BB6-5BDE-473D-A091-5EE5D28BD1CF} = {B5E37BB6-5BDE-473D-A091-5EE5D28BD1CF}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.OnlineTaskManagement.Web", "Todo.OnlineTaskManagement.Web\Todo.OnlineTaskManagement.Web.csproj", "{E99C0EB4-5C8D-4747-8A91-0B4F1AD191AE}"
-	ProjectSection(ProjectDependencies) = postProject
-		{6E7D2F15-1D04-4224-979E-5071621C73AA} = {6E7D2F15-1D04-4224-979E-5071621C73AA}
-		{824D5FA5-C13F-4BC8-B4AC-D8A5FCA35F8F} = {824D5FA5-C13F-4BC8-B4AC-D8A5FCA35F8F}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.OnlineTaskManagement.Application", "Todo.OnlineTaskManagement.Application\Todo.OnlineTaskManagement.Application.csproj", "{6E7D2F15-1D04-4224-979E-5071621C73AA}"
 	ProjectSection(ProjectDependencies) = postProject
 		{491B6FB0-62CB-433A-AC7E-B8E4A9F0ABB5} = {491B6FB0-62CB-433A-AC7E-B8E4A9F0ABB5}
@@ -33,17 +19,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.OnlineTaskManagement.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.OnlineTaskManagement.ApplicationCore", "Todo.OnlineTaskManagement.ApplicationCore\Todo.OnlineTaskManagement.ApplicationCore.csproj", "{491B6FB0-62CB-433A-AC7E-B8E4A9F0ABB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{C3E7FBB0-3284-4338-B75B-52B191B1DE58}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.OnlineTaskManagement.WebApplication", "Todo.OnlineTaskManagement.WebApplication\Todo.OnlineTaskManagement.WebApplication.csproj", "{22B3A27B-26B1-4734-8FAA-4C630CDDD9C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp1", "BlazorApp1\BlazorApp1.csproj", "{D0E569F3-3BAE-4475-810E-F49634EEF8BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.OnlineTaskManagement.Web", "Todo.OnlineTaskManagement.Web\Todo.OnlineTaskManagement.Web.csproj", "{91D354AB-BBC0-4558-87F7-1FBE1B77B9BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.OnlineTaskManagement.BlazorApp", "Todo.OnlineTaskManagement.BlazorApp\Todo.OnlineTaskManagement.BlazorApp.csproj", "{9F5F8CC2-C6E9-4B05-9DD0-9B471007C4C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.OnlineTaskManagement.BlazorApp.Application", "Todo.OnlineTaskManagement.BlazorApp.Application\Todo.OnlineTaskManagement.BlazorApp.Application.csproj", "{5B886C83-6C99-F876-7CDA-EEABBBED170B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.OnlineTaskManagement.BlazorApp.Application", "Todo.OnlineTaskManagement.BlazorApp.Application\Todo.OnlineTaskManagement.BlazorApp.Application.csproj", "{53C10428-43B7-49A7-BC49-9B25245F1249}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.OnlineTaskManagement.BlazorApp.Infrastructure", "Todo.OnlineTaskManagement.BlazorApp.Infrastructure\Todo.OnlineTaskManagement.BlazorApp.Infrastructure.csproj", "{6D5E78FE-2554-4F26-842A-AEF9BDE95C4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.OnlineTaskManagement.BlazorApp.Infrastructure", "Todo.OnlineTaskManagement.BlazorApp.Infrastructure\Todo.OnlineTaskManagement.BlazorApp.Infrastructure.csproj", "{E8B494CF-5379-D292-8C74-1D89D4925F92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,14 +33,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F7AB46FE-B72F-4DC0-936E-A34B04F39C4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F7AB46FE-B72F-4DC0-936E-A34B04F39C4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F7AB46FE-B72F-4DC0-936E-A34B04F39C4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F7AB46FE-B72F-4DC0-936E-A34B04F39C4E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E99C0EB4-5C8D-4747-8A91-0B4F1AD191AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E99C0EB4-5C8D-4747-8A91-0B4F1AD191AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E99C0EB4-5C8D-4747-8A91-0B4F1AD191AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E99C0EB4-5C8D-4747-8A91-0B4F1AD191AE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6E7D2F15-1D04-4224-979E-5071621C73AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6E7D2F15-1D04-4224-979E-5071621C73AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E7D2F15-1D04-4224-979E-5071621C73AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,30 +49,22 @@ Global
 		{491B6FB0-62CB-433A-AC7E-B8E4A9F0ABB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{491B6FB0-62CB-433A-AC7E-B8E4A9F0ABB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{491B6FB0-62CB-433A-AC7E-B8E4A9F0ABB5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C3E7FBB0-3284-4338-B75B-52B191B1DE58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C3E7FBB0-3284-4338-B75B-52B191B1DE58}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C3E7FBB0-3284-4338-B75B-52B191B1DE58}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C3E7FBB0-3284-4338-B75B-52B191B1DE58}.Release|Any CPU.Build.0 = Release|Any CPU
 		{22B3A27B-26B1-4734-8FAA-4C630CDDD9C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{22B3A27B-26B1-4734-8FAA-4C630CDDD9C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22B3A27B-26B1-4734-8FAA-4C630CDDD9C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22B3A27B-26B1-4734-8FAA-4C630CDDD9C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D0E569F3-3BAE-4475-810E-F49634EEF8BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0E569F3-3BAE-4475-810E-F49634EEF8BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0E569F3-3BAE-4475-810E-F49634EEF8BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0E569F3-3BAE-4475-810E-F49634EEF8BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9F5F8CC2-C6E9-4B05-9DD0-9B471007C4C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F5F8CC2-C6E9-4B05-9DD0-9B471007C4C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F5F8CC2-C6E9-4B05-9DD0-9B471007C4C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F5F8CC2-C6E9-4B05-9DD0-9B471007C4C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{53C10428-43B7-49A7-BC49-9B25245F1249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{53C10428-43B7-49A7-BC49-9B25245F1249}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{53C10428-43B7-49A7-BC49-9B25245F1249}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{53C10428-43B7-49A7-BC49-9B25245F1249}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D5E78FE-2554-4F26-842A-AEF9BDE95C4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D5E78FE-2554-4F26-842A-AEF9BDE95C4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D5E78FE-2554-4F26-842A-AEF9BDE95C4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D5E78FE-2554-4F26-842A-AEF9BDE95C4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91D354AB-BBC0-4558-87F7-1FBE1B77B9BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91D354AB-BBC0-4558-87F7-1FBE1B77B9BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91D354AB-BBC0-4558-87F7-1FBE1B77B9BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91D354AB-BBC0-4558-87F7-1FBE1B77B9BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B886C83-6C99-F876-7CDA-EEABBBED170B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B886C83-6C99-F876-7CDA-EEABBBED170B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B886C83-6C99-F876-7CDA-EEABBBED170B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B886C83-6C99-F876-7CDA-EEABBBED170B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8B494CF-5379-D292-8C74-1D89D4925F92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8B494CF-5379-D292-8C74-1D89D4925F92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8B494CF-5379-D292-8C74-1D89D4925F92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8B494CF-5379-D292-8C74-1D89D4925F92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

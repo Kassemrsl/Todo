@@ -15,10 +15,17 @@ namespace Todo.OnlineTaskManagement.WebApplication.Controllers
             _taskService = taskService;
         }
 
-        [HttpGet("GetTasks/{id}")]
-        public async Task<IActionResult> GetTasks(int id)
+        [HttpGet("GetTaskById/{id}")]
+        public async Task<IActionResult> GetTaskById(int id)
         {
             var tasks = await _taskService.GetTaskAsync(id);
+            return Ok(tasks);
+        }
+
+        [HttpGet("GetAllTasks")]
+        public async Task<IActionResult> GetAllTasks(string userId)
+        {
+            var tasks = await _taskService.GetAllTasksAsync(userId);
             return Ok(tasks);
         }
 

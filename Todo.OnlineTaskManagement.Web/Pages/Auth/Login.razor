@@ -1,0 +1,52 @@
+﻿@page "/login"
+
+@using Todo.OnlineTaskManagement.BlazorApp.Application.Gateways
+@using Todo.OnlineTaskManagement.Shared.Requests
+
+@inject NavigationManager Navigation
+@inject IAuthGateway gateway
+
+<EditForm Model="Model" OnSubmit="Submit">
+    <DataAnnotationsValidator />
+    <div class="col-md-5 mt-4">
+        <label for="inputUsername" class="form-label">Username</label>
+        <InputText @bind-Value="@Model.Username" type="text" class="form-control " id="inputUsername"></InputText>
+    </div>
+    <div class="col-md-5 mt-4">
+        <label for="inputPassword4" class="form-label">Password</label>
+        <InputText @bind-Value="@Model.Password" type="password" class="form-control" id="inputPassword4"></InputText>
+    </div>
+
+    <div class="col-md-5 mt-4">
+        <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+</EditForm>
+
+@code {
+    private UserLoginRequest? Model { get; set; }
+    private string _errorList = string.Empty;
+
+    protected override async Task OnInitializedAsync() => Model ??= new();
+
+    private async Task Submit()
+    {
+        var loginDto = new UserLoginRequest()
+            {
+                Username = Model.Username,
+                Password = Model.Password
+            };
+
+        var result = await gateway.LoginAsync(loginDto);
+
+        if (result.Succeeded)
+        {
+            Navigation.NavigateTo("/tasks");
+        }
+        else
+        {
+            _errorList = result.ErrorList;
+        }
+    }
+
+}
+
