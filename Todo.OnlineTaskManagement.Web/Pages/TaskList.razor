@@ -3,6 +3,7 @@
 @using Todo.OnlineTaskManagement.Shared.Responses
 
 @inject ITasksGateway TasksGateway
+@inject NavigationManager NavigationManager
 
 <div class="container my-4">
 
@@ -56,13 +57,19 @@
                         <td>@row.Status</td>
                         <td>@row.DueDate.Value.ToShortDateString()</td>
                         <td>@row.Priority</td>
+                        <td>
+                            <button class="btn btn-primary" @onclick="() => EditItem(row.TaskId)">Edit</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" @onclick="() => DeleteItem(row.TaskId)">Delete</button>
+                        </td>
                     </tr>
                 }
             }
         </tbody>
 
     </table>
-
+    
     <!-- Pager -->
     <nav>
         <ul class="pagination pagination-sm">
@@ -92,6 +99,16 @@
     private async Task LoadAsync()
     {
         _rows = await TasksGateway.GetTasksAsync();
+    }
+
+    private void EditItem(int taskId)
+    {
+        NavigationManager.NavigateTo($"/tasks/editor/{taskId}");
+    }   
+
+    private async Task DeleteItem(int taskId)
+    {
+        await TasksGateway.DeleteTaskAsync(taskId);
     }
 
     private void SortBy(string key)

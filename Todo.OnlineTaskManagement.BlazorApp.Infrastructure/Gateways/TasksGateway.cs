@@ -10,12 +10,17 @@ namespace Todo.OnlineTaskManagement.BlazorApp.Infrastructure.Gateways
 {
     public class TasksGateway : ITasksGateway
     {
-        public async Task<TaskResponse> GetTaskByIdAsync()
+        public async Task<TaskResponse> GetTaskByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
         public async Task<List<TaskResponse>> GetTasksAsync()
+        {
+            throw new NotImplementedException();
+        } 
+        
+        public async Task DeleteTaskAsync(int id)
         {
             throw new NotImplementedException();
         }

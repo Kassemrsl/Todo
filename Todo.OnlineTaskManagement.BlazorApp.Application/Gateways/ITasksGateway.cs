@@ -6,6 +6,8 @@ namespace Todo.OnlineTaskManagement.BlazorApp.Application.Gateways
     {
         Task<List<TaskResponse>> GetTasksAsync();
 
-        Task<TaskResponse> GetTaskByIdAsync();
+        Task<TaskResponse> GetTaskByIdAsync(int id);
+
+        Task DeleteTaskAsync(int id);
     }
 }
