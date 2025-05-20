@@ -24,7 +24,6 @@ namespace Todo.OnlineTaskManagement.Application.Services
             {
                 Email = model.Email,
                 UserName = model.Username,
-                PhoneNumber = model.MobileNumber,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
             };

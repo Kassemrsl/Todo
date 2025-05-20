@@ -49,8 +49,6 @@
 
     private async Task OnSubmit()
     {
-        Model.Username = Model.Email;
-
         var result = await gateway.RegisterAsync(Model);
 
         if (result.Succeeded)

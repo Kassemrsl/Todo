@@ -27,9 +27,7 @@
         public string LastName { get; set; }
 
         [Required]
-        [DataType(DataType.PhoneNumber)]
-        public string MobileNumber { get; set; }
-
+        [DataType(DataType.Text)]
         public string Username { get; set; }
     }
 }
