@@ -20,7 +20,7 @@ namespace Todo.OnlineTaskManagement.BlazorApp.Infrastructure.Gateways
         {
             try
             {
-                var result = await _httpClient.PostAsJsonAsync("/account/login", model);
+                var result = await _httpClient.PostAsJsonAsync("/auth/login", model);
 
                 if (result.IsSuccessStatusCode)
                 {
@@ -52,7 +52,7 @@ namespace Todo.OnlineTaskManagement.BlazorApp.Infrastructure.Gateways
         {
             try
             {
-                var result = await _httpClient.PostAsJsonAsync("/account/register", model);
+                var result = await _httpClient.PostAsJsonAsync("/auth/register", model);
 
                 if (result.IsSuccessStatusCode)
                 {

@@ -5,7 +5,6 @@ using Todo.OnlineTaskManagement.Shared.Requests;
 
 namespace Todo.OnlineTaskManagement.WebApplication.Controllers
 {
-    [AllowAnonymous]
     public class AuthController : ControllerBase
     {
         private readonly AccountService _accountService;

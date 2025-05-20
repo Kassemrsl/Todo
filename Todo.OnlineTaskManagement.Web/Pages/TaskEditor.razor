@@ -5,8 +5,9 @@
 @using Todo.OnlineTaskManagement.Shared.Requests
 
 @inject ITasksGateway TaskGateway
+@inject NavigationManager NavigationManager
 
-<EditForm Model="Model" OnSubmit="OnSubmit">
+<EditForm Model="@Model" OnSubmit="OnSubmit">
     <DataAnnotationsValidator />
     <div class="col-md-5">
         <label for="inputTitle" class="form-label">Title</label>
@@ -18,14 +19,32 @@
     </div>
     <div class="col-md-5 mt-4">
         <label for="inputCategory" class="form-label">Category</label>
-        <InputText @bind-Value="@Model.Category" type="text" class="form-control " id="inputCategory"></InputText>
+        <InputText @bind-Value="@Model.Category" type="text" class="form-control" id="inputCategory"></InputText>
     </div>
     <div class="col-md-5 mt-4">
         <label for="inputDueDate" class="form-label">Due Date</label>
         <InputDate @bind-Value="@Model.DueDate" class="form-control " id="inputDueDate"></InputDate>
     </div>
     <div class="col-md-5 mt-4">
-        <button type="submit" class="btn btn-primary">Add</button>
+        <label for="inputStatus" class="form-label">Status</label>
+        <InputSelect @bind-Value="@Model.Status" class="form-select " id="inputStatus">
+            @foreach (var status in Enum.GetValues(typeof(Todo.OnlineTaskManagement.Shared.Responses.TaskStatus)))
+            {
+                <option value="@status">@status</option>
+            }
+        </InputSelect>
+    </div>
+    <div class="col-md-5 mt-4">
+        <label for="inputPriority" class="form-label">Priority</label>
+        <InputSelect @bind-Value="@Model.Priority" class="form-select " id="inputPriority">
+            @foreach (var priority in Enum.GetValues(typeof(Todo.OnlineTaskManagement.Shared.Responses.TaskPriority)))
+            {
+                <option value="@priority">@priority</option>
+            }
+        </InputSelect>
+    </div>
+    <div class="col-md-5 mt-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </EditForm>
 
@@ -34,7 +53,7 @@
     [Parameter]
     public int Id { get; set; }
 
-    private TaskCreationRequest? Model { get; set; }
+    private TaskCreationRequest Model { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -46,9 +65,17 @@
         {
             Model = new();
         }
+
+        StateHasChanged();
     }
 
     private async Task OnSubmit()
     {
+        var response = await TaskGateway.CreateTaskAsync(Model);
+
+        if (response > 0)
+        {
+            NavigationManager.NavigateTo("/tasks", true);
+        }
     }
 }

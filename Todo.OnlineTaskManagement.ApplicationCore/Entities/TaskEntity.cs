@@ -13,7 +13,7 @@ namespace Todo.OnlineTaskManagement.ApplicationCore.Entities
 
         public DateTime? DueDate { get; set; }
 
-        public TaskStatus Status { get; set; }
+        public int Status { get; set; }
 
         public string Category { get; set; } 
 

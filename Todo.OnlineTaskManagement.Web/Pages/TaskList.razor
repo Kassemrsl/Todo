@@ -1,4 +1,5 @@
-﻿@page "/tasks"
+﻿@page "/"
+@page "/tasks"
 @using Todo.OnlineTaskManagement.BlazorApp.Application.Gateways
 @using Todo.OnlineTaskManagement.Shared.Responses
 
@@ -6,13 +7,6 @@
 @inject NavigationManager NavigationManager
 
 <div class="container my-4">
-
-    <!-- Search bar -->
-    <div class="input-group mb-3">
-        <input class="form-control" placeholder="Search…" @bind="_search" @bind:event="oninput">
-        <button class="btn btn-primary" @onclick="LoadAsync">Go</button>
-    </div>
-
     <!-- Task table -->
     <table class="table table-hover table-sm">
         <thead>
@@ -69,7 +63,7 @@
         </tbody>
 
     </table>
-    
+
     <!-- Pager -->
     <nav>
         <ul class="pagination pagination-sm">
@@ -94,7 +88,7 @@
     private string _sort = nameof(TaskResponse.DueDate);
     private bool _asc = true;
 
-    protected override Task OnInitializedAsync() => LoadAsync();
+    protected override async Task OnInitializedAsync() => await LoadAsync();
 
     private async Task LoadAsync()
     {
@@ -104,11 +98,15 @@
     private void EditItem(int taskId)
     {
         NavigationManager.NavigateTo($"/tasks/editor/{taskId}");
-    }   
+    }
 
     private async Task DeleteItem(int taskId)
     {
         await TasksGateway.DeleteTaskAsync(taskId);
+
+        StateHasChanged();
+
+        await LoadAsync();
     }
 
     private void SortBy(string key)

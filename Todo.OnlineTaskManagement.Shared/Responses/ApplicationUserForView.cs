@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Todo.OnlineTaskManagement.Shared.Responses
+﻿namespace Todo.OnlineTaskManagement.Shared.Responses
 {
     public class ApplicationUserForView
     {
         public string UserId { get; set; }
+        public string Username { get; set; }
 
         public string FirstName { get; set; }
 

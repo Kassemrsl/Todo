@@ -1,4 +1,5 @@
-﻿using Todo.OnlineTaskManagement.Shared.Responses;
+﻿using Todo.OnlineTaskManagement.Shared.Requests;
+using Todo.OnlineTaskManagement.Shared.Responses;
 
 namespace Todo.OnlineTaskManagement.BlazorApp.Application.Gateways
 {
@@ -9,5 +10,7 @@ namespace Todo.OnlineTaskManagement.BlazorApp.Application.Gateways
         Task<TaskResponse> GetTaskByIdAsync(int id);
 
         Task DeleteTaskAsync(int id);
+
+        Task<int> CreateTaskAsync(TaskCreationRequest taskCreationRequest);
     }
 }

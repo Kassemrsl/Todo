@@ -16,8 +16,8 @@ namespace Todo.OnlineTaskManagement.Application.Services
                 Category = taskCreationRequest.Category,
                 Description = taskCreationRequest.Description,
                 DueDate = taskCreationRequest.DueDate,
-                Status =  (int)Shared.Responses.TaskStatus.NotStarted,
-                Priority = (int)TaskPriority.Low,
+                Status =  (int)taskCreationRequest.Status,
+                Priority = (int)taskCreationRequest.Priority,
                 Title = taskCreationRequest.Title,
                 UserId = taskCreationRequest.UserId,
             });

@@ -34,8 +34,6 @@ namespace Todo.OnlineTaskManagement.Application.Services
 
             if (createUser.Succeeded)
             {
-                await userManager.AddToRoleAsync(user, string.Empty);
-
                 await signInManager.SignInAsync(user, false);
 
                 return "User Registered :)";
@@ -52,26 +50,23 @@ namespace Todo.OnlineTaskManagement.Application.Services
             {
                 var appUser = this.userManager.Users.FirstOrDefault(x => x.UserName.ToLower() == model.Username.ToLower());
 
-                var roles = await this.userManager.GetRolesAsync(appUser);
+                var token = GenerateJwtToken(appUser);
 
-                var token = GenerateJwtToken(appUser, roles[0]);
-
-                return new UserLoginResponse() { Roles = roles.ToList(), Token = token.ToString() };
+                return new UserLoginResponse() { Token = token.ToString() };
             }
 
             return new UserLoginResponse() { Token = "User name does not exist! :(" };
         }
 
-        private string GenerateJwtToken(ApplicationUser user, string userRole)
+        private string GenerateJwtToken(ApplicationUser user)
         {
             var userClaims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Email),
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(ClaimTypes.Name, user.FirstName),
                 new Claim(ClaimTypes.Surname, user.LastName),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, userRole)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtIssuerOptions:SecretKey"]));

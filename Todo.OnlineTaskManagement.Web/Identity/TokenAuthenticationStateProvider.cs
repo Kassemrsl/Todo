@@ -28,16 +28,14 @@ namespace Todo.OnlineTaskManagement.Web.Identity
                 return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
             }
 
-            var handler = new JwtSecurityTokenHandler();
-
-            var jwtSecurityToken = handler.ReadJwtToken(token);
-
-            var expClaim = jwtSecurityToken.Claims.FirstOrDefault(x => x.Type == "exp")?.Value;
-
-            if (jwtSecurityToken.ValidTo < DateTime.UtcNow)
+            if (IsTokenExpired(token))
             {
                 throw new UnauthorizedAccessException();
             }
+
+            var handler = new JwtSecurityTokenHandler();
+
+            var jwtSecurityToken = handler.ReadJwtToken(token);
 
             var userId = jwtSecurityToken.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
 
@@ -45,16 +43,32 @@ namespace Todo.OnlineTaskManagement.Web.Identity
 
             return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, jsonResponse.Email),
+                new Claim(ClaimTypes.NameIdentifier, jsonResponse.UserId),
                 new Claim(ClaimTypes.Name, jsonResponse.FirstName),
                 new Claim(ClaimTypes.Surname, jsonResponse.LastName),
                 new Claim(ClaimTypes.Email, jsonResponse.Email),
-                new Claim(ClaimTypes.Role, jsonResponse.Role),
                 new Claim(JwtRegisteredClaimNames.Sub, jsonResponse.UserId),
-
             })));
         }
+        public static bool IsTokenExpired(string token)
+        {
+            if (string.IsNullOrWhiteSpace(token))
+                return true;
 
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+
+            var exp = jwtToken.Claims.FirstOrDefault(c => c.Type == "exp")?.Value;
+
+            if (long.TryParse(exp, out long expSeconds))
+            {
+                var expiryDate = DateTimeOffset.FromUnixTimeSeconds(expSeconds);
+                return expiryDate < DateTimeOffset.UtcNow;
+            }
+
+            // If no exp claim or invalid value, treat it as expired
+            return true;
+        }
         private async Task<ApplicationUserForView> GetUserInformation(string userId, string token)
         {
             // Add the JWT token to the Authorization header
