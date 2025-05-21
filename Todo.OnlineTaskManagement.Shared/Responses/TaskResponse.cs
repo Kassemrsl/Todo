@@ -10,9 +10,5 @@ namespace Todo.OnlineTaskManagement.Shared.Responses
     public class TaskResponse : TaskCreationRequest
     {
         public int TaskId { get; set; }
-
-        public TaskStatus Status { get; set; }
-
-        public TaskPriority Priority { get; set; }
     }
 }

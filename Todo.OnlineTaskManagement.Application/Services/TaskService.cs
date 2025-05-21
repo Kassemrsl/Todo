@@ -16,8 +16,8 @@ namespace Todo.OnlineTaskManagement.Application.Services
                 Category = taskCreationRequest.Category,
                 Description = taskCreationRequest.Description,
                 DueDate = taskCreationRequest.DueDate,
-                Status =  (int)taskCreationRequest.Status,
-                Priority = (int)taskCreationRequest.Priority,
+                Status = (int)taskCreationRequest.TaskStatus,
+                Priority = (int)taskCreationRequest.TaskPriority,
                 Title = taskCreationRequest.Title,
                 UserId = taskCreationRequest.UserId,
             });
@@ -29,12 +29,14 @@ namespace Todo.OnlineTaskManagement.Application.Services
 
             return new TaskResponse()
             {
+                TaskId = id,
+                UserId = task.UserId,
                 Category = task.Category,
                 Description = task.Description,
-                DueDate = task.DueDate.Value,
-                Priority = (TaskPriority)task.Priority,
+                DueDate = task.DueDate,
+                TaskPriority = (TaskPriority)task.Priority,
                 Title = task.Title,
-                Status = (TaskStatus)task.Status
+                TaskStatus = (TaskStatus)task.Status
             };
         }
 
@@ -47,15 +49,30 @@ namespace Todo.OnlineTaskManagement.Application.Services
                     Category = task.Category,
                     Description = task.Description,
                     DueDate = task.DueDate.Value,
-                    Priority = (TaskPriority)task.Priority,
+                    TaskPriority = (TaskPriority)task.Priority,
                     Title = task.Title,
-                    Status = (TaskStatus)task.Status
+                    TaskStatus = (TaskStatus)task.Status
                 });
         }
 
         public async Task DeleteTaskAsync(int taskId)
         {
             await _taskRepository.DeleteTaskAsync(taskId);
+        }
+
+        public async Task UpdateTaskAsync(TaskUpdateRequest taskUpdateRequest)
+        {
+            await _taskRepository.UpdateTaskAsync(new ApplicationCore.Entities.TaskEntity()
+            {
+                Id = taskUpdateRequest.TaskId,
+                Category = taskUpdateRequest.Category,
+                Description = taskUpdateRequest.Description,
+                DueDate = taskUpdateRequest.DueDate,
+                Priority = (int)taskUpdateRequest.TaskPriority,
+                Status = (int)taskUpdateRequest.TaskStatus,
+                Title = taskUpdateRequest.Title,
+                UserId = taskUpdateRequest.UserId
+            });
         }
     }
 }

@@ -15,8 +15,8 @@ namespace Todo.OnlineTaskManagement.Shared.Requests
         public DateTime? DueDate { get; set; }
         public string Category { get; set; }
 
-        public Responses.TaskStatus Status { get; set; }
+        public Responses.TaskStatus TaskStatus { get; set; }
 
-        public TaskPriority Priority { get; set; }
+        public TaskPriority TaskPriority { get; set; }
     }
 }

@@ -7,47 +7,49 @@
 @inject ITasksGateway TaskGateway
 @inject NavigationManager NavigationManager
 
-<EditForm Model="@Model" OnSubmit="OnSubmit">
-    <DataAnnotationsValidator />
-    <div class="col-md-5">
-        <label for="inputTitle" class="form-label">Title</label>
-        <InputText @bind-Value="@Model.Title" type="text" class="form-control" id="inputTitle"></InputText>
-    </div>
-    <div class="col-md-5 mt-4">
-        <label for="inputDescription" class="form-label">Description</label>
-        <InputText @bind-Value="@Model.Description" type="text" class="form-control" id="inputDescription"></InputText>
-    </div>
-    <div class="col-md-5 mt-4">
-        <label for="inputCategory" class="form-label">Category</label>
-        <InputText @bind-Value="@Model.Category" type="text" class="form-control" id="inputCategory"></InputText>
-    </div>
-    <div class="col-md-5 mt-4">
-        <label for="inputDueDate" class="form-label">Due Date</label>
-        <InputDate @bind-Value="@Model.DueDate" class="form-control " id="inputDueDate"></InputDate>
-    </div>
-    <div class="col-md-5 mt-4">
-        <label for="inputStatus" class="form-label">Status</label>
-        <InputSelect @bind-Value="@Model.Status" class="form-select " id="inputStatus">
-            @foreach (var status in Enum.GetValues(typeof(Todo.OnlineTaskManagement.Shared.Responses.TaskStatus)))
-            {
-                <option value="@status">@status</option>
-            }
-        </InputSelect>
-    </div>
-    <div class="col-md-5 mt-4">
-        <label for="inputPriority" class="form-label">Priority</label>
-        <InputSelect @bind-Value="@Model.Priority" class="form-select " id="inputPriority">
-            @foreach (var priority in Enum.GetValues(typeof(Todo.OnlineTaskManagement.Shared.Responses.TaskPriority)))
-            {
-                <option value="@priority">@priority</option>
-            }
-        </InputSelect>
-    </div>
-    <div class="col-md-5 mt-4">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</EditForm>
-
+@if (Model != null)
+{
+    <EditForm Model="@Model" OnSubmit="OnSubmit">
+        <DataAnnotationsValidator />
+        <div class="col-md-5">
+            <label for="inputTitle" class="form-label">Title</label>
+            <InputText @bind-Value="@Model.Title" type="text" class="form-control" id="inputTitle"></InputText>
+        </div>
+        <div class="col-md-5 mt-4">
+            <label for="inputDescription" class="form-label">Description</label>
+            <InputText @bind-Value="@Model.Description" type="text" class="form-control" id="inputDescription"></InputText>
+        </div>
+        <div class="col-md-5 mt-4">
+            <label for="inputCategory" class="form-label">Category</label>
+            <InputText @bind-Value="@Model.Category" type="text" class="form-control" id="inputCategory"></InputText>
+        </div>
+        <div class="col-md-5 mt-4">
+            <label for="inputDueDate" class="form-label">Due Date</label>
+            <InputDate @bind-Value="@Model.DueDate" class="form-control " id="inputDueDate"></InputDate>
+        </div>
+        <div class="col-md-5 mt-4">
+            <label for="inputStatus" class="form-label">Status</label>
+            <InputSelect @bind-Value="@Model.TaskStatus" class="form-select " id="inputStatus">
+                @foreach (Todo.OnlineTaskManagement.Shared.Responses.TaskStatus status in Enum.GetValues(typeof(Todo.OnlineTaskManagement.Shared.Responses.TaskStatus)))
+                {
+                    <option value="@status">@status.ToString()</option>
+                }
+            </InputSelect>
+        </div>
+        <div class="col-md-5 mt-4">
+            <label for="inputPriority" class="form-label">Priority</label>
+            <InputSelect @bind-Value="@Model.TaskPriority" class="form-select " id="inputPriority">
+                @foreach (Todo.OnlineTaskManagement.Shared.Responses.TaskPriority priority in Enum.GetValues(typeof(Todo.OnlineTaskManagement.Shared.Responses.TaskPriority)))
+                {
+                    <option value="@priority">@priority.ToString()</option>
+                }
+            </InputSelect>
+        </div>
+        <div class="col-md-5 mt-4">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </EditForm>
+}
 @code {
 
     [Parameter]
@@ -71,11 +73,25 @@
 
     private async Task OnSubmit()
     {
-        var response = await TaskGateway.CreateTaskAsync(Model);
-
-        if (response > 0)
+        if (Id > 0)
         {
-            NavigationManager.NavigateTo("/tasks", true);
+            await TaskGateway.UpdateTaskAsync(new TaskUpdateRequest()
+                {
+                    Category = Model.Category,
+                    Description = Model.Description,
+                    DueDate = Model.DueDate,
+                    TaskId = Id,
+                    TaskPriority = Model.TaskPriority,
+                    TaskStatus = Model.TaskStatus,
+                    Title = Model.Title
+                });
         }
+        else
+        {
+            await TaskGateway.CreateTaskAsync(Model);
+        }
+
+        NavigationManager.NavigateTo("/tasks", true);
+        StateHasChanged();
     }
 }

@@ -11,6 +11,8 @@ namespace Todo.OnlineTaskManagement.ApplicationCore.Repositories
         Task<IQueryable<TaskEntity>> GetUserTasksAsync(string userId);
 
         Task DeleteTaskAsync(int taskId);
+
+        Task UpdateTaskAsync(TaskEntity task);
     }
 }
 

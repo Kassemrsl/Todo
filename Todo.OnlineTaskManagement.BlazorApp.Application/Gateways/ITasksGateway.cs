@@ -12,5 +12,7 @@ namespace Todo.OnlineTaskManagement.BlazorApp.Application.Gateways
         Task DeleteTaskAsync(int id);
 
         Task<int> CreateTaskAsync(TaskCreationRequest taskCreationRequest);
+
+        Task UpdateTaskAsync(TaskUpdateRequest taskUpdateRequest);
     }
 }

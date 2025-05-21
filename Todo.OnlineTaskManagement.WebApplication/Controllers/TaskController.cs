@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -40,23 +41,22 @@ namespace Todo.OnlineTaskManagement.WebApplication.Controllers
         {
             var claims = User.Claims;
 
-            request.UserId = claims.FirstOrDefault(x=>x.Type == ClaimTypes.NameIdentifier)?.Value;
+            request.UserId = claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
             return Ok(await _taskService.CreateNewTaskAsync(request));
         }
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> UpdateTask(int id, TaskItem task)
-        //{
-        //    if (id != task.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPut("UpdateTask")]
+        public async Task<IActionResult> UpdateTask([FromBody] TaskUpdateRequest taskUpdateRequest)
+        {
+            var claims = User.Claims;
 
-        //    taskService.Entry(task).State = EntityState.Modified;
-        //    await taskService.SaveChangesAsync();
-        //    return NoContent();
-        //}
+            taskUpdateRequest.UserId = claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            await _taskService.UpdateTaskAsync(taskUpdateRequest);
+
+            return Ok();
+        }
 
         [HttpDelete("DeleteTask/{id}")]
         public async Task<IActionResult> DeleteTask(int id)

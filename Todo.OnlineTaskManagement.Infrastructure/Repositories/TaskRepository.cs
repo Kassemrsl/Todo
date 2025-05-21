@@ -38,5 +38,12 @@ namespace Todo.OnlineTaskManagement.Infrastructure.Repositories
 
             await _appDbContext.SaveChangesAsync();
         }
+
+        public async Task UpdateTaskAsync(TaskEntity task)
+        {
+            _appDbContext.Tasks.Update(task);
+
+            await _appDbContext.SaveChangesAsync();
+        }
     }
 }

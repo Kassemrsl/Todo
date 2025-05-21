@@ -19,7 +19,7 @@ namespace Todo.OnlineTaskManagement.BlazorApp.Infrastructure.Gateways
         private readonly ILocalStorageService _localStorageService;
 
 
-        public TasksGateway(HttpClient client, ILocalStorageService localStorageService)    
+        public TasksGateway(HttpClient client, ILocalStorageService localStorageService)
         {
             this.httpClient = client;
 
@@ -86,7 +86,6 @@ namespace Todo.OnlineTaskManagement.BlazorApp.Infrastructure.Gateways
             }
 
             throw new Exception("Error in creating tasks");
-
         }
 
         public async Task DeleteTaskAsync(int id)
@@ -99,6 +98,23 @@ namespace Todo.OnlineTaskManagement.BlazorApp.Infrastructure.Gateways
             }
 
             var result = await httpClient.DeleteAsync($"api/Task/DeleteTask/{id}");
+
+            if (!result.IsSuccessStatusCode)
+            {
+                throw new Exception("Error in creating tasks");
+            }
+        }
+
+        public async Task UpdateTaskAsync(TaskUpdateRequest taskUpdateRequest)
+        {
+            var token = await GetAccessTokenAsync();
+
+            if (!string.IsNullOrEmpty(token))
+            {
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            }
+
+            var result = await httpClient.PutAsJsonAsync("api/Task/UpdateTask", taskUpdateRequest);
 
             if (!result.IsSuccessStatusCode)
             {

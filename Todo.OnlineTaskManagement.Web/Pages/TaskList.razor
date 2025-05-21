@@ -20,14 +20,14 @@
                 <th @onclick="() => SortBy(nameof(TaskResponse.Category))" role="button">
                     Category @SortIcon(nameof(TaskResponse.Category))
                 </th>
-                <th @onclick="() => SortBy(nameof(TaskResponse.Status))" role="button">
-                    Status @SortIcon(nameof(TaskResponse.Status))
+                <th @onclick="() => SortBy(nameof(TaskResponse.TaskStatus))" role="button">
+                    Status @SortIcon(nameof(TaskResponse.TaskStatus))
                 </th>
                 <th @onclick="() => SortBy(nameof(TaskResponse.DueDate))" role="button">
                     Due @SortIcon(nameof(TaskResponse.DueDate))
                 </th>
-                <th @onclick="() => SortBy(nameof(TaskResponse.Priority))" role="button">
-                    Priority @SortIcon(nameof(TaskResponse.Priority))
+                <th @onclick="() => SortBy(nameof(TaskResponse.TaskPriority))" role="button">
+                    Priority @SortIcon(nameof(TaskResponse.TaskPriority))
                 </th>
             </tr>
         </thead>
@@ -48,9 +48,9 @@
                         <td>@row.Title</td>
                         <td>@row.Description</td>
                         <td>@row.Category</td>
-                        <td>@row.Status</td>
+                        <td>@row.TaskStatus</td>
                         <td>@row.DueDate.Value.ToShortDateString()</td>
-                        <td>@row.Priority</td>
+                        <td>@row.TaskPriority</td>
                         <td>
                             <button class="btn btn-primary" @onclick="() => EditItem(row.TaskId)">Edit</button>
                         </td>
