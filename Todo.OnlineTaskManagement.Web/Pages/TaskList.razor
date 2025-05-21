@@ -1,8 +1,8 @@
 ﻿@page "/"
 @page "/tasks"
+@using Microsoft.AspNetCore.Authorization
 @using Todo.OnlineTaskManagement.BlazorApp.Application.Gateways
 @using Todo.OnlineTaskManagement.Shared.Responses
-
 @inject ITasksGateway TasksGateway
 @inject NavigationManager NavigationManager
 

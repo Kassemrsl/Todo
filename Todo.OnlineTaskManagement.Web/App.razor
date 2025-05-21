@@ -5,9 +5,9 @@
 <CascadingAuthenticationState>
     <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData">
-            @if (routeData.PageType == typeof(Login))
+            @if (routeData.PageType == typeof(Login) || routeData.PageType == typeof(Register))
             {
-                <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+                <RouteView RouteData="@routeData" DefaultLayout="@typeof(AuthLayout)" />
             }
             else
             {

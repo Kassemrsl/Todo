@@ -6,8 +6,10 @@
 @inject NavigationManager Navigation
 @inject IAuthGateway gateway
 
-<EditForm Model="Model" OnSubmit="Submit">
+<EditForm Model="Model" OnSubmit="Submit" style="align-content:center">
     <DataAnnotationsValidator />
+    <h1>Login</h1>
+
     <div class="col-md-5 mt-4">
         <label for="inputUsername" class="form-label">Username</label>
         <InputText @bind-Value="@Model.Username" type="text" class="form-control " id="inputUsername"></InputText>
@@ -40,7 +42,7 @@
 
         if (result.Succeeded)
         {
-            Navigation.NavigateTo("/tasks");
+            Navigation.NavigateTo("/tasks", true);
         }
         else
         {

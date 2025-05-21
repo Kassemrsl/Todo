@@ -7,8 +7,11 @@
 
 @inject NavigationManager Navigation
 
+
 <EditForm Model="Model" OnSubmit="OnSubmit">
     <DataAnnotationsValidator />
+    <h1>Register</h1>
+
     <div class="col-md-5">
         <label for="inputFirstName" class="form-label">First Name</label>
         <InputText @bind-Value="@Model.FirstName" type="text" class="form-control" id="inputFirstName"></InputText>
